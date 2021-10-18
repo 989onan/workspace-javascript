@@ -296,6 +296,10 @@
                     <option> 30-34 </option>
                     <option> 35-39</option>
                     <option> 40-44 </option>
+                    <option> 45-49 </option>
+                    <option> 50-54 </option>
+                    <option> 55-59 </option>
+                    <option> 60-64 </option>
 
                 </select>
 
@@ -303,17 +307,30 @@
             <p>
                 <input id="pbutton" type="button" value="Check Premium">
             </p>
-            <p id="result">
+            <p id="result3">
 
             </p>
 
             <script>
                 function getPremium(){
                     //get the radio values
-                    var e1 = document.querySelector("input[name=\"coverage\"]:checked");
+                    var e1 = document.querySelector("input[name=\"coverage\"]:checked").value;
+                    var e2 = document.getElementById("agegroup").selectedIndex;
                     var coverage = parseInt(e1.value);
                     console.log(coverage);
+                    var agefactor=0;
+                    switch(e2){
+                        case 0: agefactor=0.08;break;
+                        case 1: agefactor=0.09;break;
+                        case 2: agefactor=0.11;break;
+                        case 3: agefactor=0.17;break;
+                        case 4: agefactor=0.29;break;
+                        case 5: agefactor=0.48;break;
+                        case 6: agefactor=0.75;break;
+                        case 7: agefactor=1.17;break;
                     }
+                    document.getElementById("result3").innerHTML = "Your premium is: "+(10+(e1*agefactor));
+                }
                 document.getElementById("pbutton").addEventListener("click",getPremium,false);
             </script>
 
@@ -327,9 +344,24 @@
             <p> Display the square of numer 1... N </p>
             <p> N = <input type="number" min="1" max="10" id="inputnumber1"> </p>
             <p>
-                <input type="button" value="Click for Square">
+                <input type="button" id="squarebutton" value="Click for Square">
             </p>
+            <p id="result4">
 
+            </p>
+            <script>
+                document.getElementById("squarebutton").addEventListener('click',dosquare);
+                //input event
+                function dosquare(){
+                    var N = parseInt(document.getElementById("inputnumber1").value);
+                    var result = "";
+                    for(var i=1;i<=N;i++){
+                        var isquare = i*i;
+                        result += "<h2> "+isquare+"</h2>";
+                    }
+                    document.getElementById("result4").innerHTML = result;
+                }
+            </script>
         </div>
 
 
